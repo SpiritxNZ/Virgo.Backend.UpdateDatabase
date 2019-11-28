@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Virgo.Backend.Repository.Context;
 using Virgo.Backend.UpdateDatabase.Helper;
+using Virgo.Backend.UpdateDatabase.interfaces;
+using Virgo.Backend.UpdateDatabase.services;
 
 namespace Virgo.Backend.UpdateDatabase
 {
@@ -19,6 +21,8 @@ namespace Virgo.Backend.UpdateDatabase
             {
                 builder.UseMySQL(mysqlConnectionString);
             });
+
+            services.AddScoped<IMigrationService, DatabaseMigrationService>();
 
             return services.BuildServiceProvider();
         }
